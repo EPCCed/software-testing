@@ -20,9 +20,10 @@ body {
   font-weight: normal;
   color: #000;
 
-  background-image : url("../../images/drawing.svg"), url("../../images/drawing2.svg");;
-  background-position: 2% 0%, 2% 50%;
+  background-image : url("../../images/drawing.svg"), url("../../images/UoE_Stacked Logo_CMYK_v1_160215.png");;
+  background-position: 2% 0%, 98% 2%;
   background-repeat: no-repeat, no-repeat;
+  background-size:auto, 20% auto;
 
   }
 
