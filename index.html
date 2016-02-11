@@ -2,440 +2,630 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <title>EPCC MSc - Software Development - Testing</title>
-    <meta name="description" content="Code testing for HPC">
-    <meta name="author" content="Nick Johnson">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-    <link rel="stylesheet" href="css/reveal.css">
-    <link rel="stylesheet" href="css/theme/epcc.css" id="theme">
-    <!-- Code syntax highlighting -->
-    <link rel="stylesheet" href="lib/css/zenburn.css">
-    <!-- Printing and PDF exports -->
+  <meta charset="utf-8">
+  <title>EPCC MSc - Software Development - Testing</title>
+  <meta name="description" content="Code testing for HPC">
+  <meta name="author" content="Nick Johnson">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/epcc.css" id="theme">
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="lib/css/zenburn.css">
+  <!-- Printing and PDF exports -->
 
-    <script>
-        var link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
-        document.getElementsByTagName('head')[0].appendChild(link);
-    </script>
-    <!--[if lt IE 9]>
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+  <!--[if lt IE 9]>
 <script src="lib/js/html5shiv.js"></script>
 <![endif]-->
 </head>
 
 <body>
-    <div class="reveal">
-        <!-- Any section element inside of this container is displayed as a slide -->
-        <div class="slides">
-            <!-- Pre-amble for class -->
-            <section>
-                <section>
-                    <h1>Software Development</h1>
-                    <h3>Software Testing</h3>
-                    <p><small>Given by <a href=
+  <div class="reveal">
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+      <!-- Pre-amble for class -->
+      <section>
+        <section>
+          <h1>Software Development</h1>
+          <h3>Software Testing</h3>
+          <p><small>Given by <a href=
                                               "http://www.epcc.ed.ac.uk/people/dr-nick-johnson">Nick Johnson</a>
                             / <a href="http://twitter.com/nickaj">@nickaj</a><br>
                             <a href=
                                "mailto:Nick.Johnson@ed.ac.uk">Nick.Johnson@ed.ac.uk</a></small></p>
-                </section>
-                <section>
-                    <h2>Agenda for Today</h2>
-                    <ul>
-                        <li>About 45-60 minutes of talk from me.</li>
-                        <li>About 45 minutes for the practical.</li>
-                        <li>The remainder of time for questions (or feel free to email in later)
-                        </li>
-                    </ul>
-                </section>
-            </section>
-            <!-- Motivation section -->
-            <section>
-                <section>
-                    <h2>What is software testing?</h2>
-                    <p>The process of testing all parts of the software package to ensure a quality software product</p>
-                </section>
-                <section>
-                    <h2>A Quality Software Product...</h2>
-                    <ul>
-                        <li>Starts with a <em>customer</em> with a <em>problem</em></li>
-                        <li>This generates requirements</li>
-                        <li>Then you produce the solution:</li>
-                        <li style="list-style: none; display: inline">
-                            <ul>
-                                <li>Design</li>
-                                <li>Code</li>
-                                <li>Installation</li>
-                                <li>Documentation</li>
-                            </ul>
-                        </li>
-                        <li>Software is everything you deliver</li>
-                        <li>All of it is testable</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>A Quality Software Product or Package contains...</h2>
-                    <ul>
-                        <li>Source code</li>
-                        <li>Build system</li>
-                        <li>Run/Job submission scripts</li>
-                        <li>Documentation</li>
-                        <li>Class/Unit/System/Integration Tests</li>
-                        <li>Test outputs</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>What is a Quality Software Product?</h2>
-                    <img data-src="QualityCube.png" alt="Quality Cube"></section>
-                <section>
-                    <h2>Testing helps ensures that we have a quality product</h2>
-                    <p>A quality product is one that meets the end users expectations
-                    </p>
-                    <p>What is bad software?</p>
-                    <ul>
-                        <li>Any product that does not live up to its expectations</li>
-                        <li>Testing is an important part of any quality assurance process
-                        </li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Testing</h2>
-                    <ul>
-                        <li>Improves the quality of software</li>
-                        <li>Reduces the number of errors</li>
-                        <li>Finds those errors quicker</li>
-                        <li>Gives confidence in the software itself</li>
-                        <li>Gives confidence to make changes</li>
-                        <li>Makes you think about the interfaces and purpose of different parts of the software</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Testing answers questions</h2>
-                    <p class="fragment">How do you know your program works?</p>
-                    <p class="fragment">Do you get the right result?</p>
-                    <p class="fragment">Do all the pieces work?</p>
-                    <p class="fragment">How can you demonstrate it is correct to others?
-                    </p>
-                    <p class="fragment">How do you know someone else’s code is correct?
-                        <br> see if it compiles?</p>
-                </section>
-                <section>
-                    <h2>Be clever, spend our valuable effort on <b>important</b>
+        </section>
+        <section>
+          <h2>Agenda for Today</h2>
+          <ul>
+            <li>About 45-60 minutes of talk from me.</li>
+            <li>About 45 minutes for the practical.</li>
+            <li>The remainder of time for questions (or feel free to email in later)
+            </li>
+          </ul>
+        </section>
+      </section>
+      <!-- Motivation section -->
+      <section>
+        <section>
+          <h2>What is software testing?</h2>
+          <p>The process of testing all parts of the software package to ensure a quality software product</p>
+        </section>
+        <section>
+          <h2>A Quality Software Product...</h2>
+          <ul>
+            <li>Starts with a <em>customer</em> with a <em>problem</em></li>
+            <li>This generates requirements</li>
+            <li>Then you produce the solution:</li>
+            <li style="list-style: none; display: inline">
+              <ul>
+                <li>Design</li>
+                <li>Code</li>
+                <li>Installation</li>
+                <li>Documentation</li>
+              </ul>
+            </li>
+            <li>Software is everything you deliver</li>
+            <li>All of it is testable</li>
+          </ul>
+        </section>
+        <section>
+          <h2>A Quality Software Product or Package contains...</h2>
+          <ul>
+            <li>Source code</li>
+            <li>Build system</li>
+            <li>Run/Job submission scripts</li>
+            <li>Documentation</li>
+            <li>Class/Unit/System/Integration Tests</li>
+            <li>Test outputs</li>
+          </ul>
+        </section>
+        <section>
+          <h2>What is a Quality Software Product?</h2>
+          <img data-src="QualityCube.png" alt="Quality Cube"></section>
+        <section>
+          <h2>Testing helps ensures that we have a quality product</h2>
+          <p>A quality product is one that meets the end users expectations
+          </p>
+          <p>What is bad software?</p>
+          <ul>
+            <li>Any product that does not live up to its expectations</li>
+            <li>Testing is an important part of any quality assurance process
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Testing</h2>
+          <ul>
+            <li>Improves the quality of software</li>
+            <li>Reduces the number of errors</li>
+            <li>Finds those errors quicker</li>
+            <li>Gives confidence in the software itself</li>
+            <li>Gives confidence to make changes</li>
+            <li>Makes you think about the interfaces and purpose of different parts of the software</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Testing answers questions</h2>
+          <p class="fragment">How do you know your program works?</p>
+          <p class="fragment">Do you get the right result?</p>
+          <p class="fragment">Do all the pieces work?</p>
+          <p class="fragment">How can you demonstrate it is correct to others?
+          </p>
+          <p class="fragment">How do you know someone else’s code is correct?
+            <br> see if it compiles?</p>
+        </section>
+        <section>
+          <h2>Be clever, spend our valuable effort on <b>important</b>
                             things</h2>
-                    <p class="fragment">Test our code and prove it gives <em>right</em> answer
-                    </p>
-                    <p class="fragment">Make our lives easier by using automated testing frameworks and processes</p>
-                    <p class="fragment">Save us time by letting th computer do the hard work
-                    </p>
-                    <p class="fragment">Improve the quality of our software package by finding bugs</p>
-                    <p class="fragment">Let us know when we have finished</p>
-                </section>
-                <section>
-                    <h2>Testing is</h2>
-                    <ul>
-                        <li>NOT just a bug hunt</li>
-                        <li style="list-style: none; display: inline">
-                            <ul>
-                                <li><em>We rushed the design and development, so we’re testing to
+          <p class="fragment">Test our code and prove it gives <em>right</em> answer
+          </p>
+          <p class="fragment">Make our lives easier by using automated testing frameworks and processes</p>
+          <p class="fragment">Save us time by letting th computer do the hard work
+          </p>
+          <p class="fragment">Improve the quality of our software package by finding bugs</p>
+          <p class="fragment">Let us know when we have finished</p>
+        </section>
+        <section>
+          <h2>Testing is</h2>
+          <ul>
+            <li>NOT just a bug hunt</li>
+            <li style="list-style: none; display: inline">
+              <ul>
+                <li><em>We rushed the design and development, so we’re testing to
                                         find all the bad bugs before someone else does!</em></li>
-                            </ul>
-                            <br>
-                        </li>
-                        <li>NOT something we do at the end of a project</li>
-                        <li style="list-style: none; display: inline">
-                            <ul>
-                                <li>The earlier you find a bug, the easier it is to fix</li>
-                                <li>Test early, and test often!</li>
-                                <li>Do it continuously, from the start</li>
-                                <li>Bugs you find at the design stage are cheaper to fix than once you start coding</li>
-                                <li>Find errors whenthe problem area is fresh in your mind</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </section>
-            </section>
-            <section>
-                <h2>What type of software can we test?</h2>
-                <ul>
-                    <li>Source code?</li>
-                    <li>Documentation? Results?</li>
-                    <li>Talks?</li>
-                    <li>All can be considered part of a quality software package.</li>
-                </ul>
-                <a href="http://nickaj.github.io/software-testing/">http://nickaj.github.io/software-testing/</a></section>
-            <!-- Bad Examples of Testing... -->
-            <section>
-                <section><img data-src="Patriot.jpg" alt="Missile" data--background-size="contain"></section>
-                <section>
-                    <h2>Patriot Missile System</h2>
-                    <p>Highly publicised</p>
-                    <p>Highly ineffective</p>
-                    <ul class="fragment">
-                        <li>Time used to calculate target velocity</li>
-                        <li>System converted time from internal clock to an integer</li>
-                        <li>Cumulative error in conversion</li>
-                        <li>Periodic re-boot to minimise error</li>
-                        <li>No-one ever thought to test this!</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Ariane 5 Explosion</h2>
-                    <ul>
-                        <li>Code from Ariane 4 re-used</li>
-                        <li>Faster engines in Ariane 5 triggered a bug which caused buffer overflows
-                        </li>
-                        <li>Oops!! – No comprehensive testing of old code in the new platform
-                        </li>
-                        <li class="fragment">Result – A very big bang</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Therac-25: Medical Linac</h2>
-                    <p>Two modes: “Electron” and “X-ray”</p>
-                    <ul>
-                        <li>Defect in control sequence – user entered <b>X</b> by mistake
-                        </li>
-                        <li>Quickly corrected sequence, entering <b>E</b></li>
-                        <li>Ran sequence – original sequence ran, not corrected</li>
-                        <li>Because user corrected error quickly, the system did not update the change.</li>
-                        <li class="fragment">Several deaths occured</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Adept Measurement System</h2>
-                    <p>High-speed measurement system for power analysis</p>
-                    <ul>
-                        <li>Hardware system created by project partner</li>
-                        <li>Sample application provided to check system health and function
-                        </li>
-                        <li>Performed conversion from measured values to <em>real</em> values
-                        </li>
-                        <li>Code for conversion re-used</li>
-                        <li>Output from higher stack applications tested against sample application
-                        </li>
-                        <li class="fragment">Over-read power by ~2.</li>
-                    </ul>
-                </section>
-            </section>
-            <!-- The consequences of poor quality software -->
-            <section>
-                <section>
-                    <h2>Poor Quality Software is</h2>
-                    <ul>
-                        <li>Hard to maintain</li>
-                        <li>Hard to change</li>
-                        <li>Embarrassing</li>
-                        <li>Costly</li>
-                        <li>At worst, fatal</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Costs</h2>
-                    <p>The cost of smaller defects can still add up</p>
-                    <p>How much time does it take to find and fix a bug?</p>
-                    <ul>
-                        <li><small>1 person isolating and identifying bug --&gt; 1/2 hour</small></li>
-                        <li><small>5 people reading bug report --&gt; 1/4 hour per
+              </ul>
+              <br>
+            </li>
+            <li>NOT something we do at the end of a project</li>
+            <li style="list-style: none; display: inline">
+              <ul>
+                <li>The earlier you find a bug, the easier it is to fix</li>
+                <li>Test early, and test often!</li>
+                <li>Do it continuously, from the start</li>
+                <li>Bugs you find at the design stage are cheaper to fix than once you start coding</li>
+                <li>Find errors whenthe problem area is fresh in your mind</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <h2>What type of software can we test?</h2>
+        <ul>
+          <li>Source code?</li>
+          <li>Documentation? Results?</li>
+          <li>Talks?</li>
+          <li>All can be considered part of a quality software package.</li>
+        </ul>
+        <a href="http://nickaj.github.io/software-testing/">http://nickaj.github.io/software-testing/</a></section>
+      <!-- Bad Examples of Testing... -->
+      <section>
+        <section><img data-src="Patriot.jpg" alt="Missile" data-background-size="contain"></section>
+        <section data-background="" alt="Missile" data-background-size="contain">
+
+          <h2>Patriot Missile System</h2>
+          <p>Highly publicised</p>
+          <p>Highly ineffective</p>
+          <ul class="fragment">
+            <li>Time used to calculate target velocity</li>
+            <li>System converted time from internal clock to an integer</li>
+            <li>Cumulative error in conversion</li>
+            <li>Periodic re-boot to minimise error</li>
+            <li>No-one ever thought to test this!</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Ariane 5 Explosion</h2>
+          <ul>
+            <li>Code from Ariane 4 re-used</li>
+            <li>Faster engines in Ariane 5 triggered a bug which caused buffer overflows
+            </li>
+            <li>Oops!! – No comprehensive testing of old code in the new platform
+            </li>
+            <li class="fragment">Result – A very big bang</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Therac-25: Medical Linac</h2>
+          <p>Two modes: “Electron” and “X-ray”</p>
+          <ul>
+            <li>Defect in control sequence – user entered <b>X</b> by mistake
+            </li>
+            <li>Quickly corrected sequence, entering <b>E</b></li>
+            <li>Ran sequence – original sequence ran, not corrected</li>
+            <li>Because user corrected error quickly, the system did not update the change.</li>
+            <li class="fragment">Several deaths occured</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Adept Measurement System</h2>
+          <p>High-speed measurement system for power analysis</p>
+          <ul>
+            <li>Hardware system created by project partner</li>
+            <li>Sample application provided to check system health and function
+            </li>
+            <li>Performed conversion from measured values to <em>real</em> values
+            </li>
+            <li>Code for conversion re-used</li>
+            <li>Output from higher stack applications tested against sample application
+            </li>
+            <li class="fragment">Over-read power by ~2.</li>
+          </ul>
+        </section>
+      </section>
+      <!-- The consequences of poor quality software -->
+      <section>
+        <section>
+          <h2>Poor Quality Software is</h2>
+          <ul>
+            <li>Hard to maintain</li>
+            <li>Hard to change</li>
+            <li>Embarrassing</li>
+            <li>Costly</li>
+            <li>At worst, fatal</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Costs</h2>
+          <p>The cost of smaller defects can still add up</p>
+          <p>How much time does it take to find and fix a bug?</p>
+          <ul>
+            <li><small>1 person isolating and identifying bug --&gt; 1/2 hour</small></li>
+            <li><small>5 people reading bug report --&gt; 1/4 hour per
                                 person</small></li>
-                        <li><small>2 people reproducing bug --&gt; 1/4
+            <li><small>2 people reproducing bug --&gt; 1/4
                                 hr/person</small></li>
-                        <li><small>1 person to fix --&gt; 1 hr</small></li>
-                        <li><small>Testing fix --&gt; 1/4 hour</small></li>
-                        <li><small>Commit/review changes --&gt; 1/4 hour</small></li>
-                        <li><small>Total --&gt; 2 1/2 hours</small></li>
-                    </ul>
-                    <p class="fragment">What happens if you find 10 bugs per day?</p>
-                    <p class="fragment">When caught by customers, easily add on an extra hour for measurable costs, plus harm to reputation.</p>
-                    <p class="fragment">The earlier in the development process you find a defect, the less expensive it is to fix</p>
-                </section>
-            </section>
-            <!-- Summary of Testing -->
-            <section>Software testing includes the processes that: • Find out how our software behaves • Give us confidence that it does what we designed it to do • Establish the quality of the product • Testing allows us to reduce the number of costly defects
-                in our software Testing should be done from the beginning</section>
-            <!-- Types of testing -->
-            <section>
-                <section>
-                    <h2>When?</h2>
-                    <p>Testing should occur throughout the software development process
-                    </p>
-                    <br>
-                    <p>Tests can be applied to</p>
-                    <ul>
-                        <li>Individual components</li>
-                        <li>Groups of components</li>
-                        <li>The entire system</li>
-                    </ul>
-                    <p>
-                        <br> Lets look at types of tests applied to production quality software
-                    </p>
-                </section>
-                <section>
-                    <h2>(Factory) Acceptance Testing</h2>
-                    <ul>
-                        <li>Tests that the software does what the user wants</li>
-                        <li>They should come from the requirements</li>
-                        <li>They are MUST HAVES</li>
-                        <li>They are the first part of the software you should design</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Stress or Load Testing</h2>
-                    <ul>
-                        <li>Tests how robust the system is</li>
-                        <li>How does the system cope under heavy loads? – Or with large data sizes</li>
-                        <li>Sometimes to the point of failure – To test error handling</li>
-                        <li>Tests realistic input in realistic conditions</li>
-                        <li>Often code is developed using smaller computing resources</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>(Whole) System Testing</h2>
-                    <ul>
-                        <li><small>Tests the entire system</small></li>
-                        <li style="list-style: none; display: inline">
-                            <ul>
-                                <li><small>The system being everything you’ve done so
+            <li><small>1 person to fix --&gt; 1 hr</small></li>
+            <li><small>Testing fix --&gt; 1/4 hour</small></li>
+            <li><small>Commit/review changes --&gt; 1/4 hour</small></li>
+            <li><small>Total --&gt; 2 1/2 hours</small></li>
+          </ul>
+          <p class="fragment">What happens if you find 10 bugs per day?</p>
+          <p class="fragment">When caught by customers, easily add on an extra hour for measurable costs, plus harm to reputation.</p>
+          <p class="fragment">The earlier in the development process you find a defect, the less expensive it is to fix</p>
+        </section>
+        <!-- Summary of Testing -->
+        <section>
+          <h2>Summary</h2>
+          <p>Software testing includes the processes that:</p>
+          <ul>
+            <li>Find out how our software behaves</li>
+            <li>Give us confidence that it does what we designed it to do</li>
+            <li>Establish the quality of the product</li>
+          </ul>
+          <p>Testing allows us to reduce the number of costly defects in our software</p>
+          <p>Testing should be done from the beginning</p>
+        </section>
+      </section>
+
+
+
+      <!-- Types of testing -->
+      <section>
+        <section>
+          <h2>When?</h2>
+          <p>Testing should occur throughout the software development process
+          </p>
+          <br>
+          <p>Tests can be applied to</p>
+          <ul>
+            <li>Individual components</li>
+            <li>Groups of components</li>
+            <li>The entire system</li>
+          </ul>
+          <p>
+            <br> Lets look at types of tests applied to production quality software
+          </p>
+        </section>
+        <section>
+          <h2>(Factory) Acceptance Testing</h2>
+          <ul>
+            <li>Tests that the software does what the user wants</li>
+            <li>They should come from the requirements</li>
+            <li>They are MUST HAVES</li>
+            <li>They are the first part of the software you should design</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Stress or Load Testing</h2>
+          <ul>
+            <li>Tests how robust the system is</li>
+            <li>How does the system cope under heavy loads? – Or with large data sizes</li>
+            <li>Sometimes to the point of failure – To test error handling</li>
+            <li>Tests realistic input in realistic conditions</li>
+            <li>Often code is developed using smaller computing resources</li>
+          </ul>
+        </section>
+        <section>
+          <h2>(Whole) System Testing</h2>
+          <ul>
+            <li><small>Tests the entire system</small></li>
+            <li style="list-style: none; display: inline">
+              <ul>
+                <li><small>The system being everything you’ve done so
                                         far</small></li>
-                                <li><small>Used as a milestone check</small></li>
-                                <li><small>Gives you confidence you’re on target</small></li>
-                            </ul>
-                        </li>
-                        <li><small>Systems tests should be designed at the same time as the
+                <li><small>Used as a milestone check</small></li>
+                <li><small>Gives you confidence you’re on target</small></li>
+              </ul>
+            </li>
+            <li><small>Systems tests should be designed at the same time as the
                                 code is designed</small></li>
-                        <li><small>Think of them as mini-acceptance tests</small></li>
-                        <li style="list-style: none; display: inline">
-                            <ul>
-                                <li><small>Systems tests should ideally be done by a third-party
+            <li><small>Think of them as mini-acceptance tests</small></li>
+            <li style="list-style: none; display: inline">
+              <ul>
+                <li><small>Systems tests should ideally be done by a third-party
                                         (and involve an end-user)</small></li>
-                                <li><small>Involves destructive testing (looking for
+                <li><small>Involves destructive testing (looking for
                                         bugs)</small></li>
-                                <li><small>Constructive testing (suggesting
+                <li><small>Constructive testing (suggesting
                                         improvements)</small></li>
-                                <li><small>The tester and the developer have to work together to
+                <li><small>The tester and the developer have to work together to
                                         get the most from system testing</small></li>
-                            </ul>
-                        </li>
-                        <li><small>It’s easy for both sides to blame the other for
+              </ul>
+            </li>
+            <li><small>It’s easy for both sides to blame the other for
                                 problems</small></li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Integration Testing</h2>
-                    <ul>
-                        <li>Multiple software modules are tested together to check that they integrate properly</li>
-                        <li>Designed to test the “glue”</li>
-                        <li>Checks that interfaces are being used correctly</li>
-                        <li>Tests assumptions made by developers of different modules</li>
-                        <li>Communication throughout the development process reduces the pain when you come to do integration testing</li>
-                        <li>Very important phase of testing</li>
-                        <li>It is easy for things to fall between the gaps in modules</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Unit Testing</h2>
-                    <ul>
-                        <li>Tests individual modules and small units of code</li>
-                        <li>Verifies the low level behaviour of the software</li>
-                        <li>More on this later...</li>
-                    </ul>
-                </section>
-              <section>
-                <h2>Quality & Testing</h2>
-                <img data-src="images/cube.png" alt="Quality Cube">
+          </ul>
+        </section>
+        <section>
+          <h2>Integration Testing</h2>
+          <ul>
+            <li>Multiple software modules are tested together to check that they integrate properly</li>
+            <li>Designed to test the “glue”</li>
+            <li>Checks that interfaces are being used correctly</li>
+            <li>Tests assumptions made by developers of different modules</li>
+            <li>Communication throughout the development process reduces the pain when you come to do integration testing</li>
+            <li>Very important phase of testing</li>
+            <li>It is easy for things to fall between the gaps in modules</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Unit Testing</h2>
+          <ul>
+            <li>Tests individual modules and small units of code</li>
+            <li>Verifies the low level behaviour of the software</li>
+            <li>More on this later...</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Quality & Testing</h2>
+          <img data-src="images/cube.png" alt="Quality Cube">
 
-              </section>
+        </section>
 
-            </section>
+      </section>
 
-            <section>
-                <section>
-                    <h2>Practical</h2>
-                    <p>Work in groups of 3-5 (your choice)</p>
-                    <p>Grab the practicals code from <a href="www.learn.ed.ac.uk">www.learn.ed.ac.uk</a></p>
-                    <p>For each code, you will have about 10 minutes to define a test plan.</p>
-                </section>
-                <section>
-                    <h2>blas_op.c</h2>
-                    <p>This code is from a functional, released benchmark set and implements (naively) some BLAS operations.</p>
-                    <p>Think about:</p>
-                    <ul>
-                        <li>How would you get repeatable results across platforms?</li>
-                        <li>How would you measure success?</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Python code</h2>
-                    <p>This code is from a functional, released network traffic tester.</p>
-                    <ul>
-                        <li>Think about: How would you test this for correctness?</li>
-                        <li>What would you need?</li>
-                        <li>How could you prove it was doing the right thing.</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Python code</h2>
-                    <p>This code is from a functional, released network traffic tester. Think about how you would test this for correctness; what would you need; how could you prove it was doing the right thing.</p>
-                </section>
+      <!-- Test Management and Frameworks -->
+      <section>
+        <section>
+          <h2> Test Management</h2>
+          <p>Once you have a set of tests, at a variety of levels, management of tests become that bit more important.</p>
+          <p>A test framework can help with this.</p>
+          <p>For unit testing, something like JUnit, CppUnit etc. can help</p>
+          <p>A good project structure can lead naturally to good organisation, but this is not common.</p>
+        </section>
+        <section>
+          <h2>Rolling your own</h2>
+          <ul>
+            <li>Quite often, it's easier to make your own test harness.</li>
+            <li>Can be as simple as runalltests.bash</li>
+            <li>Can involve all sorts of wizardry with parallel builds, Docker, containers etc.</li>
+            <li>Often the running of this is (now) automatic via a CI service</li>
+            <li>Not a panacea...</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Nightly Builds</h2>
+          <ul>
+            <li>Often a reasonable trade-off between efficiency (ie not holding you back while all tests run) & good test coverage.</li>
+            <li>Called nightly but no real time element implied.</li>
+            <li>Consder a time base in Palo Alto, Edinburgh & Beijing.</li>
+            <li>Generally starts from a clean page, checks out code, compiles, runs, tests against known good output.</li>
+            <li>Generates a report, gets in contact with you if something went wrong (email, slack, text etc.)</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Benefits</h2>
+          <ul>
+            <li>A good place to run things other than Unit tests.</li>
+            <li>Helps smoke out tests which pass in your Dev Env (compiler, libraries etc.)</li>
+            <li>Can run on a bigger system (depending on scheduling).</li>
+            <li>Shows trackable progress</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Pitfalls of Testing</h2>
+          <ul>
+            <li>Not a silver bullet</li>
+            <li>Can become easy to just code to the tests without having an awareness of what's being tested</li>
+            <li>Bad tests can hinder rather than help</li>
+            <li>You must be pepared to test your tests to make sure they are doing something useful</li>
+            <li>Can easily give a false sense of quality</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Metrics</h2>
+          <ul>
+            <li>Be wary of simple metrics, what does a 95% pass rate imply?</li>
+            <li>Important to know which tests pass or fail</li>
+            <li>If grouped, can help to direct developer effort</li>
+          </ul>
+        </section>
+        <section>
+          Show Adept GitLab...
+        </section>
+        <section>
+          <h2> When to do test management</h2>
+          <ul>
+            <li>Always!</li>
+            <li>Even if you have just a couple of tests, keep records so you can see evolution over time</li>
+            <li>As project scales up, can easily become hard to control</li>
+            <li>As project team scales up, becomes important to reduce duplication</li>
+            <li>Overheads tend towards zero</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Test Roles</h2>
+          <ul>
+            <li>Define who is responsible for what</li>
+            <li>Important in larger teams, some products will have a dedicated test team</li>
+            <li>System Testing</li>
+            <li>Infrastructure testing</li>
+            <li>Release testing / Package management</li>
+            <li>Third party testing (Client/Outside)</li>
+            <li>QA</li>
+            <li>Developers still responsible for unit/small tests and correcting issues</li>
+          </ul>
+        </section>
 
-            </section>
+      </section>
+
+      <section>
+        <section>
+          <h2>Maintenance</h2>
+          <p>What happens when software is released?</p>
+          <ul>
+            <li>Defects will still be found and patches needed</li>
+            <li>A defect is just a variation between the expected and the actual</li>
+            <li>May not be a bug, just a deviation</li>
+            <li>A request for a change may be a defect, the spec has changed and the software now doesn't pass the tests</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Once it's released...</h2>
+          <ul>
+            <li>Users will find things which aren't bugs</li>
+            <li>Users will find things which are bugs, or at least bug like (variances)</li>
+            <li>Good testing will trap and catch most things, but not everything</li>
+            <li>Important that you do something, think about reputational damage</li>
+          </ul>
+        </section>
+        <section>
+          <h2>First steps</h2>
+          <ul>
+            <li>Try to document the problem</li>
+            <li>Try to repeat the problem and confirm</li>
+            <li>May have to prioritize fixes in a limited effort scenario</li>
+            <li>Write a regression test to make sure the same problem doesn't re-appear</li>
+          </ul>
+        </section>
+        <section><img data-src="images/creep.png" alt="Defect Creep"></section>
+        <section>
+          <h2>Defect Creep</h2>
+          <ul>
+            <li>When fixing bugs</li>
+            <li>We are writing more code</li>
+            <li>Therefore we introduce more defects</li>
+            <li>Defect creep: new bugs are introduced by bug fixes</li>
+            <li>Use change management and regression testing to prevent defect creep</li>
+            <li>Minimize number of new defects introduced by bug-fix work</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Minimize Impacts</h2>
+
+          <p>Only make a change/fix if necessary</p>
+          <ul>
+            <li>Risk management</li>
+            <li>Beware of quick wins!</li>
+          </ul>
+
+          <p>Never, never, never make a change without</p>
+          <ul>
+            <li>Consultation and </li>
+            <li>Documentation</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Minimize Impacts</h2>
+          <p>Treat all changes/bug-fixes as mini-projects</p>
+          <ul>
+
+            <li>Design, test, re-test</li>
+            <li>Make sure you use revision control</li>
+            <li>Consider creating a “bug-fix” stream</li>
+          </ul>
+
+
+          <p>Maintain integrity of a “release”</p>
+          <ul>
+            <li>Easy to spot if a fix “muddies the water”</li>
+            <li>Knowledge of a revision control system</li>
+          </ul>
+          <p>All help reduce “Defect Creep”</p>
+        </section>
+      </section>
+      <section>
+        <h2>Summary</h2>
+        <p>Good organisation improves quality</p>
+        <ul>
+          <li>Code, tests and data</li>
+        </ul>
+        <p>Third party testing is important</p>
+        <p>Metrics and bad tests can be misleading</p>
+        <ul>
+          <li>Have test reviews</li>
+          <li>Don’t make hasty changes</li>
+        </ul>
+      </section>
 
 
 
-        </div>
+
+      <section>
+        <section>
+          <h2>Practical</h2>
+          <p>Work in groups of 3-5 (your choice)</p>
+          <p>Grab the practicals code from <a href="www.learn.ed.ac.uk">www.learn.ed.ac.uk</a></p>
+          <p>For each code, you will have about 10 minutes to define a test plan.</p>
+        </section>
+        <section>
+          <h2>blas_op.c</h2>
+          <p>This code is from a functional, released benchmark set and implements (naively) some BLAS operations.</p>
+          <p>Think about:</p>
+          <ul>
+            <li>How would you get repeatable results across platforms?</li>
+            <li>How would you measure success?</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Python code</h2>
+          <p>This code is from a functional, released network traffic tester.</p>
+          <ul>
+            <li>Think about: How would you test this for correctness?</li>
+            <li>What would you need?</li>
+            <li>How could you prove it was doing the right thing.</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Python code</h2>
+          <p>This code is from a functional, released network traffic tester. Think about how you would test this for correctness; what would you need; how could you prove it was doing the right thing.</p>
+        </section>
+
+      </section>
+
+
+
     </div>
-    <script src="lib/js/head.min.js">
-    </script>
-    <script src="js/reveal.js">
-    </script>
-    <script>
-        // Full list of configuration options available at:
-        // https://github.com/hakimel/reveal.js#configuration
-        Reveal.initialize({
-            controls: true,
-            progress: true,
-            history: true,
-            center: true,
-            margin: 0.1,
+  </div>
+  <script src="lib/js/head.min.js">
+  </script>
+  <script src="js/reveal.js">
+  </script>
+  <script>
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+      margin: 0.1,
 
-            transition: 'slide', // none/fade/slide/convex/concave/zoom
+      transition: 'slide', // none/fade/slide/convex/concave/zoom
 
-            // Optional reveal.js plugins
-            dependencies: [{
-                src: 'lib/js/classList.js',
-                condition: function() {
-                    return !document.body.classList;
-                }
-            }, {
-                src: 'plugin/markdown/marked.js',
-                condition: function() {
-                    return !!document.querySelector('[data-markdown]');
-                }
-            }, {
-                src: 'plugin/markdown/markdown.js',
-                condition: function() {
-                    return !!document.querySelector('[data-markdown]');
-                }
-            }, {
-                src: 'plugin/highlight/highlight.js',
-                async: true,
-                condition: function() {
-                    return !!document.querySelector('pre code');
-                },
-                callback: function() {
-                    hljs.initHighlightingOnLoad();
-                }
-            }, {
-                src: 'plugin/zoom-js/zoom.js',
-                async: true
-            }, {
-                src: 'plugin/notes/notes.js',
-                async: true
-            }]
-        });
-    </script>
+      // Optional reveal.js plugins
+      dependencies: [{
+        src: 'lib/js/classList.js',
+        condition: function() {
+          return !document.body.classList;
+        }
+      }, {
+        src: 'plugin/markdown/marked.js',
+        condition: function() {
+          return !!document.querySelector('[data-markdown]');
+        }
+      }, {
+        src: 'plugin/markdown/markdown.js',
+        condition: function() {
+          return !!document.querySelector('[data-markdown]');
+        }
+      }, {
+        src: 'plugin/highlight/highlight.js',
+        async: true,
+        condition: function() {
+          return !!document.querySelector('pre code');
+        },
+        callback: function() {
+          hljs.initHighlightingOnLoad();
+        }
+      }, {
+        src: 'plugin/zoom-js/zoom.js',
+        async: true
+      }, {
+        src: 'plugin/notes/notes.js',
+        async: true
+      }]
+    });
+  </script>
 </body>
 
 </html>
