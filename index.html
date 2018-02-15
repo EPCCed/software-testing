@@ -93,8 +93,8 @@
                     <h2>What is a Quality Software Product?</h2>
                     <img class="stretch" data-src="images/QualityCube.png" alt="Quality Cube"></section>
                 <section>
-                    <h2>Testing helps ensures that we have a quality product</h2>
-                    <p>A quality product is one that meets the end users expectations
+                    <h2>Testing helps ensure that we have a quality product</h2>
+                    <p>A quality product is one that meets the end users' expectations
                     </p>
                     <p>What is bad software?</p>
                     <ul>
@@ -108,7 +108,7 @@
                     <ul>
                         <li>Improves the quality of software</li>
                         <li>Reduces the number of errors</li>
-                        <li>Finds those errors quicker</li>
+                        <li>Finds those errors more quickly</li>
                         <li>Gives confidence in the software itself</li>
                         <li>Gives confidence to make changes</li>
                         <li>Makes you think about the interfaces and purpose of different parts of the software</li>
@@ -130,7 +130,7 @@
                     <p class="fragment">Test our code and prove it gives <em>right</em> answer
                     </p>
                     <p class="fragment">Make our lives easier by using automated testing frameworks and processes</p>
-                    <p class="fragment">Save us time by letting th computer do the hard work
+                    <p class="fragment">Save us time by letting the computer do the hard work
                     </p>
                     <p class="fragment">Improve the quality of our software package by finding bugs</p>
                     <p class="fragment">Let us know when we have finished</p>
@@ -144,8 +144,11 @@
                                 <li><em>We rushed the design and development, so we’re testing to
                                         find all the bad bugs before someone else does!</em></li>
                             </ul>
-                            <br>
-                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Testing is</h2>
+                    <ul>
                         <li>NOT something we do at the end of a project</li>
                         <li style="list-style: none; display: inline">
                             <ul>
@@ -153,7 +156,7 @@
                                 <li>Test early, and test often!</li>
                                 <li>Do it continuously, from the start</li>
                                 <li>Bugs you find at the design stage are cheaper to fix than once you start coding</li>
-                                <li>Find errors whenthe problem area is fresh in your mind</li>
+                                <li>Find errors when the problem area is fresh in your mind</li>
                             </ul>
                         </li>
                     </ul>
@@ -240,20 +243,23 @@
                     <h2>Costs</h2>
                     <p>The cost of smaller defects can still add up</p>
                     <p>How much time does it take to find and fix a bug?</p>
-                    <ul>
-                        <li><small>1 person isolating and identifying bug --&gt; 1/2 hour</small></li>
-                        <li><small>5 people reading bug report --&gt; 1/4 hour per
-                                person</small></li>
-                        <li><small>2 people reproducing bug --&gt; 1/4
-                                hr/person</small></li>
-                        <li><small>1 person to fix --&gt; 1 hr</small></li>
-                        <li><small>Testing fix --&gt; 1/4 hour</small></li>
-                        <li><small>Commit/review changes --&gt; 1/4 hour</small></li>
-                        <li><small>Total --&gt; 2 1/2 hours</small></li>
-                    </ul>
-                    <p class="fragment">What happens if you find 10 bugs per day?</p>
-                    <p class="fragment">When caught by customers, easily add on an extra hour for measurable costs, plus harm to reputation.</p>
-                    <p class="fragment">The earlier in the development process you find a defect, the less expensive it is to fix</p>
+                    <small><ul>
+                        <li>1 person isolating and identifying bug --&gt; 1/2 hour</li>
+                        <li>5 people reading bug report --&gt; 1/4 hour per
+                                person</li>
+                        <li>2 people reproducing bug --&gt; 1/4
+                                hr/person</li>
+                        <li>1 person to fix --&gt; 1 hr</li>
+                        <li>Testing fix --&gt; 1/4 hour</li>
+                        <li>Commit/review changes --&gt; 1/4 hour</li>
+                        <li>Total --&gt; 2 1/2 hours</li>
+                    </ul></small>
+                </section>
+                <section>
+                    <h2>Costs</h2>
+                    <p>What happens if you find 10 bugs per day?</p>
+                    <p>When caught by customers, easily add on an extra hour for measurable costs, plus harm to reputation.</p>
+                    <p>The earlier in the development process you find a defect, the less expensive it is to fix</p>
                 </section>
                 <!-- Summary of Testing -->
                 <section>
@@ -277,7 +283,6 @@
                     <h2>When?</h2>
                     <p>Testing should occur throughout the software development process
                     </p>
-                    <br>
                     <p>Tests can be applied to</p>
                     <ul>
                         <li>Individual components</li>
@@ -285,7 +290,7 @@
                         <li>The entire system</li>
                     </ul>
                     <p>
-                        <br> Lets look at types of tests applied to production quality software
+                         Let's look at types of tests applied to production quality software
                     </p>
                 </section>
                 <section><img class="stretch" src="images/testnest.png" alt="Test Nest"></section>
@@ -322,6 +327,11 @@
                         </li>
                         <li><small>Systems tests should be designed at the same time as the
                                 code is designed</small></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>(Whole) System Testing</h2>
+                    <ul>
                         <li><small>Think of them as mini-acceptance tests</small></li>
                         <li style="list-style: none; display: inline">
                             <ul>
@@ -346,6 +356,11 @@
                         <li>Designed to test the “glue”</li>
                         <li>Checks that interfaces are being used correctly</li>
                         <li>Tests assumptions made by developers of different modules</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Integration Testing</h2>
+                    <ul>
                         <li>Communication throughout the development process reduces the pain when you come to do integration testing</li>
                         <li>Very important phase of testing</li>
                         <li>It is easy for things to fall between the gaps in modules</li>
